@@ -17,7 +17,6 @@ public class ShopApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         simplify = new Simplify();
 
         // init Simplify SDK with public api key stored in metadata
@@ -35,7 +34,6 @@ public class ShopApplication extends Application {
             if (androidPayPublicKey != null) {
                 simplify.setAndroidPayPublicKey(androidPayPublicKey);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
