@@ -12,6 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
+        <!-- Add your live Simplify public key here -->
+        <meta-data
+            android:name="com.simplify.android.sdk.apiKey"
+            android:value="sbpb_ZjkwYmYwNmEtNDQ4Yy00ZGRhLWIxN2MtMzY1NDgzN2M3ODc2" />
+
+        <!-- Add your Android Pay public key here -->
+        <meta-data
+            android:name="com.simplify.android.sdk.androidPayPublicKey"
+            android:value="BICzC3AqJbov+uNoWRR6C+E/Z9am2EVeLARsX38W7ixVqr2BhsB934PeO6SFlN0dMBXzfK6aKJmKXcYW0/+eTKg=" />
+
+        <!-- Enables the Android Pay API -->
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
