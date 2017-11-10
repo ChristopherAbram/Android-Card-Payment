@@ -6,6 +6,7 @@
         android:targetSdkVersion="25" />
 
     <application
+        android:name=".ShopApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,12 +16,12 @@
 
         <!-- Add your live Simplify public key here -->
         <meta-data
-            android:name="com.simplify.android.sdk.apiKey"
+            android:name="fi.jamk.android.apiKey"
             android:value="sbpb_ZjkwYmYwNmEtNDQ4Yy00ZGRhLWIxN2MtMzY1NDgzN2M3ODc2" />
 
         <!-- Add your Android Pay public key here -->
         <meta-data
-            android:name="com.simplify.android.sdk.androidPayPublicKey"
+            android:name="fi.jamk.android.androidPayPublicKey"
             android:value="BICzC3AqJbov+uNoWRR6C+E/Z9am2EVeLARsX38W7ixVqr2BhsB934PeO6SFlN0dMBXzfK6aKJmKXcYW0/+eTKg=" />
 
         <!-- Enables the Android Pay API -->
