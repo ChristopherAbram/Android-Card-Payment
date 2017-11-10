@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 25
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "fi.jamk.android.androidcardpayment"
-        minSdkVersion 21
-        targetSdkVersion 26
+        minSdkVersion 16
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -19,5 +20,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.google.android.gms:play-services-wallet:11.0.4'
+
+    compile 'com.simplify:simplify-android:3.2.0'
+    compile 'com.loopj.android:android-async-http:1.4.9'
 }
