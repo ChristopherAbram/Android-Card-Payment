@@ -39,7 +39,11 @@ import com.simplify.android.sdk.CardToken;
 import com.simplify.android.sdk.Customer;
 import com.simplify.android.sdk.Simplify;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class CardFormActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -233,14 +237,31 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
                         // Enable payment button:
                         mPayButton.setEnabled(true);
 
-                        //Send intent to Result Activity (Success)
-                        Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
-                        resultIntent.putExtra("customerName", card.getCustomer().getName());
-                        resultIntent.putExtra("time", new SimpleDateFormat("yyyy MMM dd - HH:mm:ss").format(new Date()));
-                        resultIntent.putExtra("itemId", mShopItem.getId());
-                        resultIntent.putExtra("result", responseString);
-                        startActivity(resultIntent);
-                        finish();
+                        String status = "ERROR";
+                        String refId = "0";
+                        try {
+                            JSONObject response = new JSONObject(responseString);
+                            status = response.getString("status");
+                            refId = response.getString("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(status.equals("APPROVED")){
+                            //Send intent to Result Activity (Success)
+                            Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
+                            resultIntent.putExtra("customerName", card.getCustomer().getName());
+                            resultIntent.putExtra("time", new SimpleDateFormat("yyyy MMM dd - HH:mm:ss").format(new Date()));
+                            resultIntent.putExtra("itemId", mShopItem.getId());
+                            resultIntent.putExtra("refId", refId);
+                            startActivity(resultIntent);
+                            finish();
+                        }else {
+                            //Send intent to Result Activity (Failed)
+                            Intent resultFailedIntent = new Intent(getBaseContext(), ResultFailedActivity.class);
+                            resultFailedIntent.putExtra("status", status);
+                            startActivity(resultFailedIntent);
+                        }
                     }
                 });
             }
@@ -252,7 +273,7 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
                 mPayButton.setEnabled(true);
 
                 //Send intent to Result Activity (Failed)
-                Intent resultFailedIntent = new Intent(getBaseContext(), MainActivity.class);
+                Intent resultFailedIntent = new Intent(getBaseContext(), ResultFailedActivity.class);
                 startActivity(resultFailedIntent);
             }
         });

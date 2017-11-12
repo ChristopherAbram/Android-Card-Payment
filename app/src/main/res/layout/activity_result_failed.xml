@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:text="FAILED"
+            android:text="PAYMENT FAIL"
             android:textSize="22dp"/>
 
         <TextView
@@ -53,7 +53,7 @@
             android:text="Go back"
             android:textColor="@color/red"
             android:layout_alignParentBottom="true"
-            android:onClick="onBackPressed"/>
+            android:onClick="onBackButton"/>
 
     </RelativeLayout>
 
