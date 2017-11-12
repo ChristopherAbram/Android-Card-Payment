@@ -161,11 +161,12 @@ public class AndroidPayActivity extends AppCompatActivity implements Simplify.An
 
             @Override
             public void onError(Throwable throwable) {
-                //throwable.printStackTrace();
+                throwable.printStackTrace();
 
                 mProgressBar.setVisibility(View.GONE);
                 mPayButton.setEnabled(true);
 
+                Toast.makeText(AndroidPayActivity.this, throwable.toString(), Toast.LENGTH_LONG).show();
                 // TODO: Display failure screen..
             }
         });
@@ -191,19 +192,21 @@ public class AndroidPayActivity extends AppCompatActivity implements Simplify.An
         // Get shop item:
         mShopItem = getItem();
 
-        // Pay button init:
-        mPayButton = (Button) findViewById(R.id.pay_button);
-        mPayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmPurchase();
-            }
-        });
+        if(mShopItem != null) {
+            // Pay button init:
+            mPayButton = (Button) findViewById(R.id.pay_button);
+            mPayButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    confirmPurchase();
+                }
+            });
 
-        // Progress bar init:
-        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+            // Progress bar init:
+            mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
-        initWalletFragment();
+            initWalletFragment();
+        }
     }
 
     private void initWalletFragment(){
@@ -251,13 +254,13 @@ public class AndroidPayActivity extends AppCompatActivity implements Simplify.An
             .setGoogleTransactionId(mMaskedWallet.getGoogleTransactionId())
             .setCart(Cart.newBuilder()
                 .setCurrencyCode(mShopItem.getCurrency().toString())
-                .setTotalPrice(ShopItem.priceToString(mShopItem.getTotalPrice()))
+                .setTotalPrice("2.00")
                 .addLineItem(LineItem.newBuilder()
                     .setCurrencyCode(mShopItem.getCurrency().toString())
                     .setDescription(mShopItem.getName())
                     .setQuantity(Integer.toString(mShopItem.getQuantity()))
-                    .setUnitPrice(mShopItem.priceToString())
-                    .setTotalPrice(ShopItem.priceToString(mShopItem.getTotalPrice()))
+                    .setUnitPrice("2.00")
+                    .setTotalPrice("2.00")
                     .build())
                 .build())
             .build();

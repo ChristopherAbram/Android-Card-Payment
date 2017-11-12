@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.BooleanResult;
@@ -43,7 +44,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 public class CardFormActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -131,6 +131,7 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
         // launch confirmation activity
         Intent intent = new Intent(getApplicationContext(), AndroidPayActivity.class);
         intent.putExtra(WalletConstants.EXTRA_MASKED_WALLET, maskedWallet);
+        intent.putExtra("itemId", mShopItem.getId());
         startActivity(intent);
     }
 
@@ -294,12 +295,14 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
                     if (booleanResult.getStatus().isSuccess()) {
                         if (booleanResult.getValue()) {
                             //Log.i(TAG, "Android Pay is ready");
+                            Toast.makeText(getBaseContext(), "Android Pay is ready", Toast.LENGTH_LONG).show();
                             showAndroidPayButton();
                             return;
                         }
                     }
 
                     //Log.i(TAG, "Android Pay not ready");
+                    Toast.makeText(getBaseContext(), "Android Pay not ready", Toast.LENGTH_LONG).show();
                     hideAndroidPayButton();
                 }
             });
@@ -361,8 +364,8 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
                 .setCurrencyCode(mShopItem.getCurrency().toString())
                 .setDescription(mShopItem.getName())
                 .setQuantity("1")
-                .setUnitPrice(mShopItem.priceToString())
-                .setTotalPrice(ShopItem.priceToString(mShopItem.getTotalPrice()))
+                .setUnitPrice("2.00")
+                .setTotalPrice("2.00")
                 .build())
             .build();
 
