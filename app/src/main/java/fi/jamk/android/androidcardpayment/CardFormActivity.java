@@ -192,11 +192,12 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
         mProgressBar.setVisibility(View.VISIBLE);
         mPayButton.setEnabled(false);
 
-        Card card = mCardEditor.getCard();
+        final Card card = mCardEditor.getCard();
 
         // TODO: set Card attributtes, like: name, last name, address etc..
         Customer customer = new Customer();
         customer.setName(mCustomerName.getText().toString()); // should be validated..
+        //customer.setEmail("krzysztofabram1@gmail.com");
 
         card.setCustomer(customer);
 
@@ -211,7 +212,11 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
                 params.put("amount", mShopItem.convertToWalletPrice());
                 params.put("currency", mShopItem.getCurrency());
                 params.put("description", mShopItem.getName());
-                params.put("order.customerName", mShopItem.getName());
+                params.put("cardName", card.getCustomer().getName());
+                params.put("addressCountry", "FI");
+                //params.put("customer", "e7RGzkoGX");
+                //params.put("customerName", card.getCustomer().getName());
+                //params.put("customerEmail", card.getCustomer().getEmail());
 
                 final TextView output = (TextView) findViewById(R.id.output);
 
