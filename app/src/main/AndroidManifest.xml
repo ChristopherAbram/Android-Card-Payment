@@ -37,15 +37,19 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".CardFormActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AndroidPayActivity"></activity>
+        <activity android:name=".CardFormActivity" />
+        <activity android:name=".AndroidPayActivity" />
+        <activity android:name=".ResultActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ResultFailedActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
