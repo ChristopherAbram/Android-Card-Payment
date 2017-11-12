@@ -8,10 +8,24 @@ import lombok.Data;
 
 public @Data class ShopItem {
     private int id;
-    private float price;
     private String name;
+    private String detail;
+    private float price;
     private Currency currency;
     private int quantity;
+
+    public ShopItem() {
+
+    }
+
+    public ShopItem(int id, String name, String detail, float price,Currency currency, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.price = price;
+        this.currency = currency;
+        this.quantity = quantity;
+    }
 
     public String convertToWalletPrice(){
         int p = (int)(price * 100);

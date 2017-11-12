@@ -1,5 +1,6 @@
 package fi.jamk.android.androidcardpayment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +39,10 @@ import com.simplify.android.sdk.CardEditor;
 import com.simplify.android.sdk.CardToken;
 import com.simplify.android.sdk.Customer;
 import com.simplify.android.sdk.Simplify;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class CardFormActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, Simplify.AndroidPayCallback {
@@ -143,16 +148,8 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
     }
 
     private ShopItem getItem(){
-        ShopItem item = new ShopItem();
-
-        // TODO: Get item data form intent - provided by another activity...
-
-        // Dummy data:
-        item.setId(1);
-        item.setName("Principles of Mathematical Analysis, Walter Rudin");
-        item.setPrice(30.50f);
-        item.setCurrency(new Currency(Currency.Code.USD));
-
+        Bundle extras = getIntent().getExtras();
+        ShopItem item = new ShopItems().get(extras.getInt("itemId"));
         return item;
     }
 
@@ -192,11 +189,11 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
         mProgressBar.setVisibility(View.VISIBLE);
         mPayButton.setEnabled(false);
 
-        Card card = mCardEditor.getCard();
+        final Card card = mCardEditor.getCard();
 
         // TODO: set Card attributtes, like: name, last name, address etc..
-        Customer customer = new Customer();
-        customer.setName(mCustomerName.getText().toString()); // should be validated..
+        final Customer customer = new Customer();
+        customer.setName(mCustomerName.getText().toString());
 
         card.setCustomer(customer);
 
@@ -206,36 +203,41 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
 
                 AsyncHttpClient mClient = new AsyncHttpClient();
 
-                RequestParams params = new RequestParams();
+                final RequestParams params = new RequestParams();
                 params.put("simplifyToken", cardToken.getId());
                 params.put("amount", mShopItem.convertToWalletPrice());
                 params.put("currency", mShopItem.getCurrency());
                 params.put("description", mShopItem.getName());
-                params.put("order.customerName", mShopItem.getName());
+                params.put("order.customerName", card.getCustomer().getName());
 
                 final TextView output = (TextView) findViewById(R.id.output);
 
                 mClient.post(Constants.SERVER + "/" + Constants.CLIENT_TOKEN, params, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString, Throwable throwable) {
-                        output.setText(responseString);
-
                         mProgressBar.setVisibility(View.GONE);
                         // Enable payment button:
                         mPayButton.setEnabled(true);
 
-                        // TODO: Create and start activity: FailureActivity or similar..
+                        //Send intent to Result Activity (Failed)
+                        Intent resultFailedIntent = new Intent(getBaseContext(), ResultFailedActivity.class);
+                        startActivity(resultFailedIntent);
                     }
 
                     @Override
                     public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseString) {
-                        output.setText(responseString);
-
                         mProgressBar.setVisibility(View.GONE);
                         // Enable payment button:
                         mPayButton.setEnabled(true);
 
-                        // TODO: Create and start activity: SuccessActivity or similar..
+                        //Send intent to Result Activity (Success)
+                        Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
+                        resultIntent.putExtra("customerName", card.getCustomer().getName());
+                        resultIntent.putExtra("time", new SimpleDateFormat("yyyy MMM dd - HH:mm:ss").format(new Date()));
+                        resultIntent.putExtra("itemId", mShopItem.getId());
+                        resultIntent.putExtra("result", responseString);
+                        startActivity(resultIntent);
+                        finish();
                     }
                 });
             }
@@ -246,7 +248,9 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
                 mProgressBar.setVisibility(View.GONE);
                 mPayButton.setEnabled(true);
 
-                // TODO: Create and start activity: FailureActivity or similar..
+                //Send intent to Result Activity (Failed)
+                Intent resultFailedIntent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(resultFailedIntent);
             }
         });
     }
