@@ -22,46 +22,47 @@ public class ResultActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         Bundle extras = getIntent().getExtras();
-        int itemId =  extras.getInt("itemId");
-        String result = extras.getString("result");
-        String customerName = extras.getString("customerName");
-        String time = extras.getString("time");
 
-        String[] results = result.split("\"");
+        if(extras != null) {
+            int itemId = extras.getInt("itemId");
+            String refId = extras.getString("refId");
+            String customerName = extras.getString("customerName");
+            String time = extras.getString("time");
 
-        ShopItem shopItem = new ShopItems().get(itemId);
+            ShopItem shopItem = new ShopItems().get(itemId);
 
-        TextView resultText = (TextView) findViewById(R.id.result_text);
-        resultText.setText(results[7]);
+            //TextView resultText = (TextView) findViewById(R.id.result_text);
+            //resultText.setText(results[7]);
 
-        TextView timeText = (TextView) findViewById(R.id.time);
-        timeText.setText(time);
+            TextView timeText = (TextView) findViewById(R.id.time);
+            timeText.setText(time);
 
-        TextView refId = (TextView) findViewById(R.id.ref_id);
-        refId.setText("Ref ID: "+ results[3]);
+            TextView refIdText = (TextView) findViewById(R.id.ref_id);
+            refIdText.setText("Ref ID: " + refId);
 
-        TextView customerNameText = (TextView) findViewById(R.id.customer_name);
-        customerNameText.setText(customerName);
+            TextView customerNameText = (TextView) findViewById(R.id.customer_name);
+            customerNameText.setText(customerName);
 
-        TextView shopItemText = (TextView) findViewById(R.id.shop_item);
-        shopItemText.setText(shopItem.getName());
+            TextView shopItemText = (TextView) findViewById(R.id.shop_item);
+            shopItemText.setText(shopItem.getName());
 
-        TextView quantity = (TextView) findViewById(R.id.quantity);
-        quantity.setText("Quantity: "+shopItem.getQuantity());
+            TextView quantity = (TextView) findViewById(R.id.quantity);
+            quantity.setText("Quantity: " + shopItem.getQuantity());
 
-        TextView totalPrice = (TextView) findViewById(R.id.total_price);
-        totalPrice.setText(shopItem.getTotalPrice()+" "+shopItem.getCurrency());
+            TextView totalPrice = (TextView) findViewById(R.id.total_price);
+            totalPrice.setText(shopItem.getTotalPrice() + " " + shopItem.getCurrency());
+        }else {
+            super.onBackPressed();
+        }
     }
 
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 
     public void confirmButton(View view) {
-        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }
