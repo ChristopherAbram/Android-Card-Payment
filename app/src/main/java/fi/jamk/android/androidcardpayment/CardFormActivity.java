@@ -189,12 +189,9 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
 
         final Card card = mCardEditor.getCard();
 
-        // TODO: set Card attributtes, like: name, last name, address etc..
-
         Customer customer = new Customer();
         customer.setName(mCustomerName.getText().toString()); // should be validated..
         //customer.setEmail("krzysztofabram1@gmail.com");
-
 
         card.setCustomer(customer);
 
@@ -288,8 +285,7 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
     }
 
     private void showAndroidPayButton() {
-        // TODO: Get fragment view..
-        //findViewById(R.id.buy_button_layout).setVisibility(View.VISIBLE);
+        findViewById(R.id.buy_button_layout).setVisibility(View.VISIBLE);
 
         // Define fragment style
         WalletFragmentStyle fragmentStyle = new WalletFragmentStyle()
@@ -318,17 +314,15 @@ public class CardFormActivity extends AppCompatActivity implements GoogleApiClie
 
         walletFragment.initialize(startParams);
 
-
-        // TODO: Add Wallet fragment to the UI - first create appropriate fragment
         // Add Wallet fragment to the UI
-        /*getFragmentManager().beginTransaction()
+        getFragmentManager().beginTransaction()
                 .replace(R.id.buy_button_holder, walletFragment, WALLET_FRAGMENT_ID)
-                .commit();*/
+                .commit();
 
     }
 
     private void hideAndroidPayButton() {
-        //findViewById(R.id.buy_button_layout).setVisibility(View.GONE);
+        findViewById(R.id.buy_button_layout).setVisibility(View.GONE);
     }
 
     private MaskedWalletRequest getMaskedWalletRequest() {
