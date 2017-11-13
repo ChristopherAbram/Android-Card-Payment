@@ -14,7 +14,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            auto:title="Confirm your order"/>
+            auto:title="Confirm your order"
+            auto:titleTextColor="@color/tintWhite"/>
 
     </android.support.design.widget.AppBarLayout>
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,11 +34,14 @@ public class ProductListAdapter extends ArrayAdapter {
         textView.setText(list.get(position).getName());
 
         TextView textView2 = (TextView) rowView.findViewById(R.id.textView2);
-        textView2.setText(list.get(position).getDetail());
+        textView2.setText(list.get(position).getType() + ": " + list.get(position).getDetail());
 
         Button button = (Button) rowView.findViewById(R.id.buyButton);
-        button.setText(list.get(position).getPrice()+" "+list.get(position).getCurrency());
+        button.setText(list.get(position).getPrice() + " " + list.get(position).getCurrency());
         button.setTag(list.get(position).getId());
+
+        RatingBar ratingBar = (RatingBar) rowView.findViewById(R.id.ratingBar);
+        ratingBar.setRating(list.get(position).getRating());
 
         return rowView;
     }

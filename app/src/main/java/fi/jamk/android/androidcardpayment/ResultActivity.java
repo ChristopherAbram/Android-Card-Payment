@@ -38,7 +38,7 @@ public class ResultActivity extends AppCompatActivity {
             timeText.setText(time);
 
             TextView refIdText = (TextView) findViewById(R.id.ref_id);
-            refIdText.setText("Ref ID: " + refId);
+            refIdText.setText(getString(R.string.ref_id) + refId);
 
             TextView customerNameText = (TextView) findViewById(R.id.customer_name);
             customerNameText.setText(customerName);
@@ -47,7 +47,7 @@ public class ResultActivity extends AppCompatActivity {
             shopItemText.setText(shopItem.getName());
 
             TextView quantity = (TextView) findViewById(R.id.quantity);
-            quantity.setText("Quantity: " + shopItem.getQuantity());
+            quantity.setText(getString(R.string.quantity) + shopItem.getQuantity());
 
             TextView totalPrice = (TextView) findViewById(R.id.total_price);
             totalPrice.setText(shopItem.getTotalPrice() + " " + shopItem.getCurrency());

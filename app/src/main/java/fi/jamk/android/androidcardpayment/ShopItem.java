@@ -13,18 +13,22 @@ public @Data class ShopItem {
     private float price;
     private Currency currency;
     private int quantity;
+    private String type;
+    private float rating;
 
     public ShopItem() {
 
     }
 
-    public ShopItem(int id, String name, String detail, float price,Currency currency, int quantity) {
+    public ShopItem(int id, String name, String detail, float price,Currency currency, int quantity, String type, float rating) {
         this.id = id;
         this.name = name;
         this.detail = detail;
         this.price = price;
         this.currency = currency;
         this.quantity = quantity;
+        this.type = type;
+        this.rating = rating;
     }
 
     public String convertToWalletPrice(){

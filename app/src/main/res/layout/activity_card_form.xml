@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:auto="http://schemas.android.com/apk/res-auto">
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,16 +34,15 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="@string/name_lastname"
-                android:textColor="@color/icon"/>
+                android:hint="@string/name_lastname"
+                android:text="Williams Johnson" />
 
             <com.simplify.android.sdk.CardEditor
                 android:id="@+id/card_editor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                auto:enabled="true"
-                auto:iconColor="@color/icon">
+                auto:enabled="true" >
 
             </com.simplify.android.sdk.CardEditor>
 
