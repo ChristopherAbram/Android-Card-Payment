@@ -40,7 +40,9 @@ public class ProductListAdapter extends ArrayAdapter {
         button.setText(list.get(position).getPrice() + " " + list.get(position).getCurrency());
         button.setTag(list.get(position).getId());
 
+        TextView ratingScore = (TextView) rowView.findViewById(R.id.ratingScore);
         RatingBar ratingBar = (RatingBar) rowView.findViewById(R.id.ratingBar);
+        ratingScore.setText(list.get(position).getRating()+" ");
         ratingBar.setRating(list.get(position).getRating());
 
         return rowView;
