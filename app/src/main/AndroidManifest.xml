@@ -22,12 +22,12 @@
         <!-- Add your live Simplify public key here -->
         <meta-data
             android:name="fi.jamk.android.apiKey"
-            android:value="sbpb_ZjkwYmYwNmEtNDQ4Yy00ZGRhLWIxN2MtMzY1NDgzN2M3ODc2" />
+            android:value="ัyour_public_simplify_key" />
 
         <!-- Add your Android Pay public key here -->
         <meta-data
             android:name="fi.jamk.android.androidPayPublicKey"
-            android:value="BICzC3AqJbov+uNoWRR6C+E/Z9am2EVeLARsX38W7ixVqr2BhsB934PeO6SFlN0dMBXzfK6aKJmKXcYW0/+eTKg=" />
+            android:value="your_public_android_pay_key" />
 
         <!-- Enables the Android Pay API -->
         <meta-data

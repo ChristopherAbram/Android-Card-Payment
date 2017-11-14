@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AndroidCardPayment</string>
-    <string name="pay_with_a_card">Pay with a card</string>
-    <string name="name_lastname">Your name and last name</string>
+    <string name="pay_with_a_card">Pay with a credit/debit card</string>
+    <string name="name_lastname">First Name and Last Name</string>
     <string name="pay_button">Pay</string>
     <string name="confirm">Confirm</string>
     <string name="success">PAYMENT SUCCESS</string>
